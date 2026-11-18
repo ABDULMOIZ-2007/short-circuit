@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "id": "voltage-divider",
+  "title": "Voltage divider",
+  "description": "A 12 V source split across 1 kΩ and 2 kΩ resistors.",
+  "components": [
+    {
+      "id": "V1",
+      "label": "V1",
+      "type": "voltage",
+      "value": 12,
+      "x": 240,
+      "y": 330,
+      "rotation": 90
+    },
+    {
+      "id": "R1",
+      "label": "R1",
+      "type": "resistor",
+      "value": 1000,
+      "x": 450,
+      "y": 180,
+      "rotation": 0
+    },
+    {
+      "id": "R2",
+      "label": "R2",
+      "type": "resistor",
+      "value": 2000,
+      "x": 660,
+      "y": 330,
+      "rotation": 90
+    },
+    {
+      "id": "G1",
+      "label": "GND",
+      "type": "ground",
+      "value": 0,
+      "x": 240,
+      "y": 490,
+      "rotation": 0
+    }
+  ],
+  "wires": [
+    {
+      "from": "V1:0",
+      "to": "R1:0"
+    },
+    {
+      "from": "R1:1",
+      "to": "R2:0"
+    },
+    {
+      "from": "R2:1",
+      "to": "G1:0"
+    },
+    {
+      "from": "G1:0",
+      "to": "V1:1"
+    }
+  ]
+}

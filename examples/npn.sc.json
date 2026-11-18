@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "id": "npn-stage",
+  "title": "NPN transistor",
+  "components": [
+    {
+      "id": "V1",
+      "label": "V1",
+      "type": "voltage",
+      "value": 5,
+      "x": 240,
+      "y": 330,
+      "rotation": 90
+    },
+    {
+      "id": "RC",
+      "label": "RC",
+      "type": "resistor",
+      "value": 1000,
+      "x": 684,
+      "y": 180,
+      "rotation": 90
+    },
+    {
+      "id": "RB",
+      "label": "RB",
+      "type": "resistor",
+      "value": 430000,
+      "x": 450,
+      "y": 330,
+      "rotation": 0
+    },
+    {
+      "id": "Q1",
+      "label": "Q1",
+      "type": "npn",
+      "value": 100,
+      "x": 660,
+      "y": 330,
+      "rotation": 0
+    },
+    {
+      "id": "G1",
+      "label": "GND",
+      "type": "ground",
+      "value": 0,
+      "x": 240,
+      "y": 490,
+      "rotation": 0
+    }
+  ],
+  "wires": [
+    {
+      "from": "V1:0",
+      "to": "RC:0"
+    },
+    {
+      "from": "RC:1",
+      "to": "Q1:0"
+    },
+    {
+      "from": "V1:0",
+      "to": "RB:0"
+    },
+    {
+      "from": "RB:1",
+      "to": "Q1:2"
+    },
+    {
+      "from": "Q1:1",
+      "to": "G1:0"
+    },
+    {
+      "from": "G1:0",
+      "to": "V1:1"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "id": "zener-regulator",
+  "title": "Zener regulator",
+  "components": [
+    {
+      "id": "V1",
+      "label": "V1",
+      "type": "voltage",
+      "value": 12,
+      "x": 240,
+      "y": 330,
+      "rotation": 90
+    },
+    {
+      "id": "R1",
+      "label": "R1",
+      "type": "resistor",
+      "value": 1000,
+      "x": 450,
+      "y": 180,
+      "rotation": 0
+    },
+    {
+      "id": "X1",
+      "label": "X1",
+      "type": "zener",
+      "value": 5.1,
+      "x": 660,
+      "y": 330,
+      "rotation": 270
+    },
+    {
+      "id": "G1",
+      "label": "GND",
+      "type": "ground",
+      "value": 0,
+      "x": 240,
+      "y": 490,
+      "rotation": 0
+    }
+  ],
+  "wires": [
+    {
+      "from": "V1:0",
+      "to": "R1:0"
+    },
+    {
+      "from": "R1:1",
+      "to": "X1:1"
+    },
+    {
+      "from": "X1:0",
+      "to": "G1:0"
+    },
+    {
+      "from": "G1:0",
+      "to": "V1:1"
+    }
+  ]
+}

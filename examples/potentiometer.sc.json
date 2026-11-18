@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "id": "adjustable-divider",
+  "title": "Adjustable divider",
+  "components": [
+    {
+      "id": "V1",
+      "label": "V1",
+      "type": "voltage",
+      "value": 9,
+      "x": 240,
+      "y": 330,
+      "rotation": 90
+    },
+    {
+      "id": "RV1",
+      "label": "RV1",
+      "type": "potentiometer",
+      "value": 10000,
+      "x": 520,
+      "y": 300,
+      "rotation": 90,
+      "setting": 0.25
+    },
+    {
+      "id": "R1",
+      "label": "R1",
+      "type": "resistor",
+      "value": 10000,
+      "x": 720,
+      "y": 400,
+      "rotation": 90
+    },
+    {
+      "id": "G1",
+      "label": "GND",
+      "type": "ground",
+      "value": 0,
+      "x": 240,
+      "y": 540,
+      "rotation": 0
+    }
+  ],
+  "wires": [
+    {
+      "from": "V1:0",
+      "to": "RV1:0"
+    },
+    {
+      "from": "RV1:1",
+      "to": "G1:0"
+    },
+    {
+      "from": "RV1:2",
+      "to": "R1:0"
+    },
+    {
+      "from": "R1:1",
+      "to": "G1:0"
+    },
+    {
+      "from": "G1:0",
+      "to": "V1:1"
+    }
+  ]
+}

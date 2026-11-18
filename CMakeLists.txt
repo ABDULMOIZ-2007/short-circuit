@@ -1,0 +1,26 @@
+cmake_minimum_required(VERSION 3.16)
+project(short_circuit LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(SC_SOURCE packages/short_circuit_core/src)
+add_library(short_circuit_core SHARED ${SC_SOURCE}/short_circuit.cpp)
+target_include_directories(short_circuit_core PUBLIC ${SC_SOURCE})
+enable_testing()
+add_executable(core_tests tests/core_tests.cpp)
+target_link_libraries(core_tests PRIVATE short_circuit_core)
+add_test(NAME core_tests COMMAND core_tests)
+
+
+file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/test-projects")
+target_compile_definitions(core_tests PRIVATE SC_TEST_STORAGE="${CMAKE_CURRENT_BINARY_DIR}/test-projects")
+set_tests_properties(core_tests PROPERTIES WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
+
+add_executable(extended_core_tests tests/extended_core_tests.cpp)
+target_include_directories(extended_core_tests PRIVATE ${SC_SOURCE})
+add_test(NAME extended_core_tests COMMAND extended_core_tests)
+
+add_executable(current_flow_tests tests/current_flow_tests.cpp)
+target_include_directories(current_flow_tests PRIVATE ${SC_SOURCE})
+add_test(NAME current_flow_tests COMMAND current_flow_tests)
+set_tests_properties(current_flow_tests PROPERTIES WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
