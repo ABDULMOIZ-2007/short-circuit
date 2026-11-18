@@ -1,6 +1,6 @@
 # Short Circuit 0.5 — Android mobile app
 
-A pocket circuit lab for Abdul Moiz's OOP project. Flutter provides the mobile interface; C++17 owns the electrical model, numerical solver and project persistence.
+Flutter provides the mobile interface; C++17 owns the electrical model, numerical solver and project persistence.
 
 ## Install or run
 
