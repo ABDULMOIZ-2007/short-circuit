@@ -1,0 +1,117 @@
+{
+  "version": "0.5.0+5",
+  "date": "2026-10-26",
+  "toolchain": {
+    "flutter": "3.47.8",
+    "dart": "3.13.7",
+    "java": "21.0.12",
+    "androidSdk": 36,
+    "ndk": "28.2.13676358"
+  },
+  "flutter": {
+    "analysis": "No issues found",
+    "testsPassed": 27,
+    "nativeFFI": true,
+    "packagedExamplesSolved": 9
+  },
+  "native": {
+    "originalChecksPassed": 2062,
+    "extendedChecksPassed": 3042,
+    "models": [
+      "resistor",
+      "capacitor",
+      "inductor",
+      "voltage",
+      "current",
+      "ground",
+      "switch",
+      "potentiometer",
+      "diode",
+      "led",
+      "zener",
+      "npn",
+      "pnp"
+    ],
+    "currentFlowChecksPassed": 734,
+    "scope": "Numerical core unchanged from verified version 0.4"
+  },
+  "visual": {
+    "screens": [
+      [
+        320,
+        640
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        780,
+        390
+      ]
+    ],
+    "largeTextScale": 1.4,
+    "canvasWorld": [
+      4800,
+      3200
+    ],
+    "checks": [
+      "Canvas occupies more than 74% of tested viewport height",
+      "Real production theme and real UI fonts in rendered captures",
+      "Pinch zoom in Select",
+      "Three-terminal wiring when zoomed out",
+      "Search all 13 component models",
+      "Potentiometer wiper editing",
+      "Save/load and draft recovery",
+      "Native animation moves between rendered frames",
+      "Pause/resume and navigation stop the ticker",
+      "Reduced-motion mode remains static",
+      "Open-switch leakage does not animate",
+      "Seamless loop: rendered start and end frames are identical",
+      "Animation stops on background and resumes on foreground",
+      "Bundled production typography used in UI captures",
+      "Actual starter-circuit thumbnails load",
+      "DC node-potential plots and native RC waveform selectors verified",
+      "0.5× and 2× timing controls preserve reduced-motion preference"
+    ]
+  },
+  "device": {
+    "previousVersion": "User confirmed 0.2 works on their Android phone",
+    "currentVersion": "No physical Android device or emulator attached to the 0.5 build session"
+  },
+  "apk": {
+    "status": "Verified",
+    "filename": "Short_Circuit_Android.apk",
+    "versionName": "0.5.0",
+    "versionCode": 2005,
+    "bytes": 22727050,
+    "sha256": "7fd66bcdbc587f6d3b42cc01c4c1ff5fddfdce5b5899d77ce67a0c03eec5b6c0",
+    "abi": "arm64-v8a",
+    "minSdk": 24,
+    "targetSdk": 36,
+    "nativeLibraries": [
+      "lib/arm64-v8a/libapp.so",
+      "lib/arm64-v8a/libc++_shared.so",
+      "lib/arm64-v8a/libdartjni.so",
+      "lib/arm64-v8a/libflutter.so",
+      "lib/arm64-v8a/libshort_circuit_core.so"
+    ],
+    "ffiExportsVerified": true,
+    "signatureV2Verified": true,
+    "sameSigningCertificateAsPreviousRelease": true,
+    "zipAlignment16KiBVerified": true,
+    "productionFontsAndLicensesBundled": true
+  },
+  "animation": {
+    "direction": "Conventional current from C++",
+    "rendering": "Connected streams with particle cores, halos and fading trails",
+    "thresholdAmps": 1e-9,
+    "speeds": [
+      0.5,
+      1,
+      2
+    ],
+    "transient": "Final-sample current",
+    "electricalSolver": "Unchanged C++17 core"
+  }
+}

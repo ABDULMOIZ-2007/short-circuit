@@ -1,0 +1,15 @@
+{
+  "name": "short-circuit-preview",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Offline preview and verification tools for the Short Circuit Flutter/C++ project",
+  "scripts": {
+    "test": "node --test tests/solver.test.js",
+    "test:ui": "node tests/ui.test.js",
+    "assets": "node tools/generate_assets.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.62.1",
+    "sharp": "^0.34.0"
+  }
+}

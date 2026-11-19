@@ -1,0 +1,21 @@
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const {execute}=require('../preview/solver');
+const example=n=>JSON.parse(fs.readFileSync(path.join(__dirname,'../examples',n+'.sc.json'),'utf8'));
+const near=(a,b,tol=1e-9)=>assert.ok(Math.abs(a-b)<=tol, a+' != '+b);
+const run=p=>execute({op:'simulate',project:p}).result;
+test('12 V divider: signed currents, 8 V output and conservation of power',()=>{const r=run(example('divider'));near(r.components[2].voltage,8);near(r.components[1].current,.004);near(r.components[0].power,-.048);near(r.dissipatedPower,.048);near(r.powerBalance,0);});
+test('parallel branches sum to 18 mA',()=>{const r=run(example('parallel'));near(r.components[0].current,-.018);near(r.components[1].current,.009);near(r.powerBalance,0);});
+test('RC: initial condition, monotonic charging and convergence to analytic curve',()=>{const p=example('rc'),r=execute({op:'transient',project:p,duration:.05,steps:1000}).result,s=r.samples;near(s[0].components[2].voltage,0);for(let i=1;i<s.length;i++){assert.ok(s[i].components[2].voltage>=s[i-1].components[2].voltage);near(s[i].powerBalance,0,1e-10);}near(s.at(-1).components[2].voltage,5*(1-Math.exp(-5)),.0005);near(s[200].components[2].voltage,5*(1-Math.exp(-1)),.005);});
+test('capacitor is an open circuit at DC',()=>{const r=run(example('rc'));near(r.components[2].voltage,5);near(r.components[2].current,0);near(r.components[1].current,0);});
+test('current source polarity and negative node potentials',()=>{const p={schema:1,components:[{id:'I1',label:'I1',type:'current',value:.002},{id:'R1',label:'R1',type:'resistor',value:1000},{id:'G1',label:'GND',type:'ground',value:0}],wires:[{from:'I1:0',to:'R1:0'},{from:'I1:1',to:'G1:0'},{from:'R1:1',to:'G1:0'}]};const r=run(p);near(r.components[1].voltage,-2);near(r.components[1].current,-.002);near(r.powerBalance,0);});
+test('multiple grounds share the same reference node',()=>{const p=example('divider');p.components.push({id:'G2',label:'GND',type:'ground',value:0});p.wires[2].to='G2:0';near(run(p).components[2].voltage,8);});
+test('floating network is diagnosed',()=>{const p=example('divider');p.wires=p.wires.filter(w=>w.from!=='G1:0'&&w.to!=='G1:0');assert.throws(()=>run(p),/Floating|floating/);});
+test('missing ground is diagnosed',()=>{const p=example('divider');p.components=p.components.filter(c=>c.type!=='ground');p.wires=[];assert.throws(()=>run(p),/ground/);});
+test('shorted ideal source is rejected',()=>{const p=example('divider');p.wires.push({from:'V1:0',to:'V1:1'});assert.throws(()=>run(p),/shorted/);});
+test('inconsistent parallel sources are rejected',()=>{const p=example('divider');p.components.push({id:'V2',label:'V2',type:'voltage',value:7});p.wires.push({from:'V1:0',to:'V2:0'},{from:'V1:1',to:'V2:1'});assert.throws(()=>run(p),/conflicting/);});
+test('invalid resistance, NaN and unsupported component are rejected',()=>{for(const v of [0,-1,NaN,Infinity]){const p=example('divider');p.components[1].value=v;assert.throws(()=>run(p));}const p=example('divider');p.components[1].type='diode';assert.throws(()=>run(p),/Unsupported/);});
+test('duplicate IDs and dangling wires are rejected',()=>{let p=example('divider');p.components.push({...p.components[0]});assert.throws(()=>run(p),/duplicate/);p=example('divider');p.wires[0].from='absent:0';assert.throws(()=>run(p),/missing/);});
+test('transient duration and step bounds are enforced',()=>{for(const [duration,steps]of [[0,200],[Infinity,200],[.05,1],[.05,1001],[.05,2.2]])assert.throws(()=>execute({op:'transient',project:example('rc'),duration,steps}));});
+test('transient requires a capacitor',()=>assert.throws(()=>execute({op:'transient',project:example('divider'),duration:.05,steps:200}),/capacitor/));
+test('small conductance remains solvable after row scaling',()=>{const p=example('divider');p.components[1].value=1e12;p.components[2].value=1e12;near(run(p).components[2].voltage,6,1e-6);});
+
