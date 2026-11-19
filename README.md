@@ -8,11 +8,6 @@ Install releases/Short_Circuit_Android.apk on an Android ARM64 phone (Android 7 
 
 For source builds, see MOBILE_BUILD.md. The tested tools are Flutter 3.47.8, Dart 3.13.7, Java 21, Android SDK 36 and NDK 28.2.13676358. RUN_ANDROID.cmd runs the app on a connected device; BUILD_ANDROID.cmd builds a debug APK. The application ID is edu.moiz.short_circuit.
 
-## CSC241 Level 2
-
-The [Level 2 C++17 demonstration](level2/README.md) is a compact console implementation of the same 12 V divider shipped with the app. It includes the class diagram, build commands, and a guide to the OOP relationships. Use MOBILE_BUILD.md to build the Flutter application with the full native engine.
-
-The [Level 2 design document](docs/Short_Circuit_Level_2_Design.pdf) covers the UML, build setup, and verified divider demonstration.
 
 ## Mobile workspace
 
